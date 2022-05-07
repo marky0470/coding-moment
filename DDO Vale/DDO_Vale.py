@@ -64,5 +64,5 @@ class Board:
         y = int((n - (x + 1)) / size)
         return [y,x]
 
-board = Board(3)
+board = Board(input("Enter size of board: ")
 
