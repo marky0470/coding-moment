@@ -11,7 +11,7 @@ class Button:
 class Board:
 
     def __init__(self, size):
-        self.size = size
+        self.size = int(size)
         self.buttons = [[Button() for i in range(size)] for j in range(size)]
         self.difficulty = int(input("Choose a difficulty:\n[0] Easy\n[1] Medium\n[2] Hard\n"))        
         self.isCardinal = True if self.difficulty == 0 else False
@@ -29,7 +29,10 @@ class Board:
     def playing(self):
         while self.isWon == False:
             userInput = input("Coordinates or number of button\n")
-            y,x = list(map(lambda x : x - 1, map(int, input("Coordinates of the button to press\n").split(','))))
+            try:
+                y,x = list(map(lambda x : x - 1, map(int, userInput.split(','))))
+            except:
+                y,x = self.numToCoords(int(userInput))
             inputButton = self.buttons[x][y]
             inputButton.changeState()
 
@@ -64,5 +67,5 @@ class Board:
         y = int((n - (x + 1)) / size)
         return [y,x]
 
-board = Board(input("Enter size of board: ")
+board = Board(int(input("Enter size of board: ")))
 
